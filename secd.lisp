@@ -46,3 +46,6 @@
 
 (defun derive (x E)
   (cons E x))
+
+(defun location (E X)
+  (cdr (assoc X E)))
