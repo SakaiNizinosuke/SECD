@@ -43,3 +43,6 @@
 
 (defun my_assoc (x y)
   (cons x y))
+
+(defun derive (x E)
+  (cons E x))
