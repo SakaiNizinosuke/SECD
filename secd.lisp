@@ -17,3 +17,13 @@
 
 (defun body (x)
   (subseq x 4 (- (length x) 1)))
+
+(defun rand (x)
+  (block nil
+	(if (not (char= (char x 1) #\())
+  		(return (subseq x 3 (- (length x) 1))))
+	(let ((count_pt 0))
+		(loop for i from 1 to (- (length x) 1) do
+			  (if (char= (char x i) #\() (setq count_pt (+ count_pt 1)))
+			  (if (char= (char x i) #\)) (setq count_pt (- count_pt 1)))
+			  (if (= count_pt 0) (return (subseq x (+ i 2) (- (length x) 1))))))))
