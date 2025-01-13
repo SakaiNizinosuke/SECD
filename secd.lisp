@@ -48,7 +48,12 @@
   (cons E x))
 
 (defun location (E X)
-  (cdr (assoc X E)))
+  (if (assoc X E)
+	(cdr (assoc X E))
+	X))
+
+(defun closure (x)
+  (= (length x) 3))
 
 (defun print_secd ()
   (format t "S: [~a]~%E: [~a]~%C: [~a]~%D: [~a]~%" *S* *E* *C* *D*))
@@ -60,4 +65,38 @@
 
 (defun transform ()
   (input)
-  (print_secd))
+  (print_secd)
+
+  (block nil
+		 (loop
+		   ;; 1
+		   (when (null C)
+			 (setq *S* (cons (first *S*) (first *D*)))
+			 (setq *E* (second *D*))
+			 (setq *C* (third *D*))
+			 (setq *D* (fourth *D*))
+			 (print)
+			 (return))
+
+		   ;; 2
+		   (unless (null C)
+			 (let ((X (first *C*)))
+			   (cond
+				 ;; 2a
+				 ((identifier X)
+				  (setq *S* (cons (location *E* *X*) *S*))
+				  (setq *C* (rest *C*)))
+				 ;; 2b
+				 ((lambda_exp X)
+				  (setq *S* (cons (construct_closure *E* (bv X) (body X))))
+				  (setq *C* (rest *C*)))
+				 ;; 2c
+				 ((string= X "ap")
+				  (let ((hs (fisrt *S*)))
+					;; 2c1
+					(when (closure hs)
+					  (setq *D* (cons (rest (rest *S*)) (cons *E* (cons (rest *C*) *D*))))
+					  (setq *E* (derive (my_assoc (second hs) (second *S*)) (fisrt hs)))
+					  (setq *S* nil)
+					  (setq *C* (unitlist (third hs))))
+				  ;; 2c1
