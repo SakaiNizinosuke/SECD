@@ -27,3 +27,13 @@
 			  (if (char= (char x i) #\() (setq count_pt (+ count_pt 1)))
 			  (if (char= (char x i) #\)) (setq count_pt (- count_pt 1)))
 			  (if (= count_pt 0) (return (subseq x (+ i 2) (- (length x) 1))))))))
+
+(defun rator (x)
+  (block nil
+	(if (not (char= (char x 1) #\())
+  		(return (subseq x 1 2)))
+	(let ((count_pt 0))
+		(loop for i from 1 to (- (length x) 1) do
+			  (if (char= (char x i) #\() (setq count_pt (+ count_pt 1)))
+			  (if (char= (char x i) #\)) (setq count_pt (- count_pt 1)))
+			  (if (= count_pt 0) (return (subseq x 1 (+ i 1))))))))
