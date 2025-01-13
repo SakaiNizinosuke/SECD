@@ -1,7 +1,7 @@
-(defparameter *S* :uninitialized)
-(defparameter *E* :uninitialized)
-(defparameter *C* :uninitialized)
-(defparameter *D* :uninitialized)
+(defparameter *S* nil)
+(defparameter *E* nil)
+(defparameter *C* nil)
+(defparameter *D* '("D0"))
 
 (defun unitlist (x)
   (cons x nil))
@@ -49,3 +49,15 @@
 
 (defun location (E X)
   (cdr (assoc X E)))
+
+(defun print_secd ()
+  (format t "S: [~a]~%E: [~a]~%C: [~a]~%D: [~a]~%" *S* *E* *C* *D*))
+
+(defun input ()
+  (format t "input lambda: ")
+  (let ((input_string (read-line)))
+  (setq *C* (unitlist input_string))))
+
+(defun transform ()
+  (input)
+  (print_secd))
