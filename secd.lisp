@@ -40,3 +40,6 @@
 
 (defun construct_closure (E bv body)
   (cons E (cons bv (cons body nil))))
+
+(defun my_assoc (x y)
+  (cons x y))
