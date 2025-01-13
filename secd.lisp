@@ -37,3 +37,6 @@
 			  (if (char= (char x i) #\() (setq count_pt (+ count_pt 1)))
 			  (if (char= (char x i) #\)) (setq count_pt (- count_pt 1)))
 			  (if (= count_pt 0) (return (subseq x 1 (+ i 1))))))))
+
+(defun construct_closure (E bv body)
+  (cons E (cons bv (cons body nil))))
