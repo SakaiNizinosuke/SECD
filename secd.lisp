@@ -113,3 +113,8 @@
 				   (setq *C* (cons (rand X) (cons (rator X) (cons "ap" (rest *C*)))))
 				   (print_secd))))))))
 					  
+(defun clean ()
+  (setq *S* nil)
+  (setq *E* nil)
+  (setq *C* nil)
+  (setq *D* '("D0")))
